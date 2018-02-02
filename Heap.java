@@ -28,7 +28,7 @@ public class Heap
 		for (int i = 0; i < arr.length; ++i)
 			hArray[i] = arr[i];
 
-		currentIndex = 100;
+		currentIndex = 101;
 
 		for (int i = 50; i > 0; --i)
 			reheap(i);
@@ -36,16 +36,25 @@ public class Heap
 
 	public void insert(int value)
 	{
-		try
+		if (currentIndex < 101)
 		{
 			hArray[currentIndex] = value;
 			upHeap(currentIndex);
 			++currentIndex;
 		}
-		catch (IndexOutOfBoundsException e)
-		{
-			System.out.println("Heap is already at max amount of stored values!");
-		}
+		else
+			System.out.println("Unable to add value.  Heap is full!");
+	}
+
+	public void removeTop()
+	{		
+		if (currentIndex > 100)
+			currentIndex = 100;
+		
+		hArray[1] = hArray[currentIndex];
+		hArray[currentIndex] = 0;
+		--currentIndex;
+		downHeap(1);
 	}
 
 	public int getSwaps()
@@ -92,12 +101,16 @@ public class Heap
 		
 		while (index <= 50)
 		{
-			if (index == 50 && hArray[index * 2] > hArray[index])
+			if (index == 50)
 			{
-				temp = hArray[index];
-				hArray[index] = hArray[index * 2];
-				hArray[index * 2] = temp;
-				++swaps;
+				if (hArray[index * 2] > hArray[index])
+				{
+					temp = hArray[index];
+					hArray[index] = hArray[index * 2];
+					hArray[index * 2] = temp;
+					++swaps;
+				}
+				
 				break;
 			}
 			else
@@ -106,6 +119,50 @@ public class Heap
 				{
 					temp = hArray[index];
 					maxIndex = getMax((index * 2), (index * 2 + 1));
+					hArray[index] = hArray[maxIndex];
+					hArray[maxIndex] = temp;
+					++swaps;
+					index = maxIndex;
+				}
+				else
+					break;
+			}
+		}
+	}
+
+	// duplicate of downHeap for debug purposes
+
+	private void downHeapDebug(int index)
+	{
+		int temp = 0;
+		int maxIndex = 0;
+		
+		while (index <= 50)
+		{
+			System.out.println("index:  " + index);
+			
+			if (index == 50)
+			{
+				if (hArray[index * 2] > hArray[index])
+				{
+					System.out.println("index is 50");
+					System.out.println("swap(" + hArray[index] + ", " + hArray[index * 2] + ")");
+					temp = hArray[index];
+					hArray[index] = hArray[index * 2];
+					hArray[index * 2] = temp;
+					++swaps;
+				}
+				
+				break;
+			}
+			else
+			{
+				if (hArray[index * 2] > hArray[index] || hArray[index * 2 + 1] > hArray[index])
+				{
+					temp = hArray[index];
+					maxIndex = getMax((index * 2), (index * 2 + 1));
+					System.out.println("maxIndex:  " + maxIndex);
+					System.out.println("swap(" + hArray[index] + ", " + hArray[maxIndex] + ")");
 					hArray[index] = hArray[maxIndex];
 					hArray[maxIndex] = temp;
 					++swaps;

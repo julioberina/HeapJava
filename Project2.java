@@ -56,6 +56,12 @@ public class Project2
 		System.out.print("Heap built using series of insertions:  ");
 		System.out.println(heap);
 		System.out.println("Number of swaps:  " + heap.getSwaps());
+		System.out.print("Heap after 10 removals:  ");
+
+		for (int i = 0; i < 10; ++i)
+			heap.removeTop();
+		
+		System.out.println(heap);
 
 		// Use optimal method next
 		heap = new Heap(fixed);
@@ -64,5 +70,11 @@ public class Project2
 		System.out.print("Heap built using optimal method:  ");
 		System.out.println(heap);
 		System.out.println("Number of swaps:  " + heap.getSwaps());
+		System.out.print("Heap after 10 removals:  ");
+
+		for (int i = 0; i < 10; ++i)
+			heap.removeTop();
+		
+		System.out.println(heap);
 	}
 }
