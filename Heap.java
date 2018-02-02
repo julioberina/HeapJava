@@ -28,6 +28,8 @@ public class Heap
 		for (int i = 0; i < arr.length; ++i)
 			hArray[i] = arr[i];
 
+		currentIndex = 100;
+
 		for (int i = 50; i > 0; --i)
 			reheap(i);
 	}
@@ -57,7 +59,7 @@ public class Heap
 
 		for (int i = 1; i < hArray.length; ++i)
 			output = output + Integer.toString(hArray[i]) + ((i < 100) ? " " : "");
-
+		
 		return output;
 	}
 
@@ -83,6 +85,44 @@ public class Heap
 		}
 	}
 
+	private void downHeap(int index)
+	{
+		int temp = 0;
+		int maxIndex = 0;
+		
+		while (index <= 50)
+		{
+			if (index == 50 && hArray[index * 2] > hArray[index])
+			{
+				temp = hArray[index];
+				hArray[index] = hArray[index * 2];
+				hArray[index * 2] = temp;
+				++swaps;
+				break;
+			}
+			else
+			{
+				if (hArray[index * 2] > hArray[index] || hArray[index * 2 + 1] > hArray[index])
+				{
+					temp = hArray[index];
+					maxIndex = getMax((index * 2), (index * 2 + 1));
+					hArray[index] = hArray[maxIndex];
+					hArray[maxIndex] = temp;
+					++swaps;
+					index = maxIndex;
+				}
+				else
+					break;
+			}
+		}
+	}
+
+	private void reheap(int index)
+	{
+		if (!isLeaf(index))
+			downHeap(index);
+	}
+
 	private boolean isLeaf(int index)
 	{
 		if ((index * 2) > 100) // if left child index is bigger than 100
@@ -100,31 +140,6 @@ public class Heap
 				return true;
 			else
 				return false;
-		}
-	}
-
-	private void reheap(int index)
-	{
-		if (!isLeaf(index))
-		{
-			int temp = 0;
-			int maxIndex = 0;
-			
-			if (index == 50 && hArray[index * 2] > hArray[index])
-			{
-				temp = hArray[index];
-				hArray[index] = hArray[index * 2];
-				hArray[index * 2] = temp;
-				++swaps;
-			}
-			else if ((hArray[index * 2] > hArray[index]) || (hArray[index * 2 + 1] > hArray[index]))
-			{
-				temp = hArray[index];
-				maxIndex = getMax((index * 2), (index * 2 + 1));
-				hArray[index] = hArray[maxIndex];
-				hArray[maxIndex] = temp;
-				++swaps;
-			}
 		}
 	}
 
