@@ -130,50 +130,6 @@ public class Heap
 		}
 	}
 
-	// duplicate of downHeap for debug purposes
-
-	private void downHeapDebug(int index)
-	{
-		int temp = 0;
-		int maxIndex = 0;
-		
-		while (index <= 50)
-		{
-			System.out.println("index:  " + index);
-			
-			if (index == 50)
-			{
-				if (hArray[index * 2] > hArray[index])
-				{
-					System.out.println("index is 50");
-					System.out.println("swap(" + hArray[index] + ", " + hArray[index * 2] + ")");
-					temp = hArray[index];
-					hArray[index] = hArray[index * 2];
-					hArray[index * 2] = temp;
-					++swaps;
-				}
-				
-				break;
-			}
-			else
-			{
-				if (hArray[index * 2] > hArray[index] || hArray[index * 2 + 1] > hArray[index])
-				{
-					temp = hArray[index];
-					maxIndex = getMax((index * 2), (index * 2 + 1));
-					System.out.println("maxIndex:  " + maxIndex);
-					System.out.println("swap(" + hArray[index] + ", " + hArray[maxIndex] + ")");
-					hArray[index] = hArray[maxIndex];
-					hArray[maxIndex] = temp;
-					++swaps;
-					index = maxIndex;
-				}
-				else
-					break;
-			}
-		}
-	}
-
 	private void reheap(int index)
 	{
 		if (!isLeaf(index))
