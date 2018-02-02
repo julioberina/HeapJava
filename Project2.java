@@ -6,8 +6,8 @@ import java.util.Random;
 */
 public class Project2
 {
-	private Random rand = null;
-	private Heap heap = null;
+	private static Random rand = null;
+	private static Heap heap = null;
 	
 	public static void main(String[] args)
 	{
@@ -50,14 +50,18 @@ public class Project2
 
 		// Use sequential insertions first
 		heap = new Heap();
-		for (int num : fixed)
-			heap.insert(num);
+		for (int i = 1; i < fixed.length; ++i)
+			heap.insert(fixed[i]);
 
-		System.out.println("Average swaps for series of insertions:  " + heap.getSwaps());
+		System.out.print("Heap built using series of insertions:  ");
+		System.out.println(heap);
+		System.out.println("Number of swaps:  " + heap.getSwaps());
 
 		// Use optimal method next
 		heap = new Heap(fixed);
 
-		System.out.println("Average swaps for optimal method:  " + heap.getSwaps());
+		System.out.print("Heap built using optimal method:  ");
+		System.out.println(heap);
+		System.out.println("Number of swaps:  " + heap.getSwaps());
 	}
 }
