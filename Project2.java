@@ -59,6 +59,7 @@ public class Project2
 
 		// Use optimal method next
 		heap = new Heap(fixed);
+		System.out.print("\n");
 
 		System.out.print("Heap built using optimal method:  ");
 		System.out.println(heap);
