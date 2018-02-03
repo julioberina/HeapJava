@@ -62,6 +62,38 @@ public class Heap
 		return swaps;
 	}
 
+	// BEGIN CHOICE 1 SPECIFIC METHODS
+	
+	public void clear()
+	{
+		if (hArray.length > 0)
+		{
+			for (int i = 0; i < hArray.length; ++i)
+				hArray[i] = 0;
+		}
+		
+		currentIndex = 1;
+		swaps = 0;
+	}
+
+	public void reset(int[] arr)
+	{
+		swaps = 0;
+
+		if (hArray.length == 0)
+			hArray = new int[arr.length];
+			
+		for (int i = 0; i < arr.length; ++i)
+			hArray[i] = arr[i];
+		
+		currentIndex = 101;
+
+		for (int i = 50; i > 0; --i)
+			reheap(i);
+	}
+
+	// END CHOICE 1 SPECIFIC METHODS
+	
 	public String toString()
 	{
 		String output = "";

@@ -1,5 +1,8 @@
 import java.util.Scanner;
 import java.util.Random;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /*
   This class represents the main class for the entire project containing the main method
@@ -36,9 +39,56 @@ public class Project2
 		}
 	}
 
+	public static int[] convertToIntArray(Object[] arr)
+	{
+		int[] result = new int[arr.length];
+
+		for (int i = 0; i < arr.length; ++i)
+			result[i] = ((int)arr[i]);
+
+		return result;
+	}
+
+	public static int mean(int[] arr)
+	{
+		int total = 0;
+
+		for (int num: arr)
+			total += num;
+
+		return (total / arr.length);
+	}
+
 	public static void choice1()
 	{
-		
+		List<Integer> list = new ArrayList<Integer>();
+		int[] swapStats = new int[20];
+		heap = new Heap();
+
+		for (int i = 1; i <= 100; ++i)
+			list.add(i);
+
+		for (int i = 0; i < 20; ++i)
+		{
+			Collections.shuffle(list);
+			
+			for (int j = 0; j < 100; ++j)
+				heap.insert(list.get(j));
+
+			swapStats[i] = heap.getSwaps();
+			heap.clear();
+		}
+
+		System.out.printf("Average swaps for series of insertions:  %d\n", mean(swapStats));
+
+		for (int i = 0; i < 20; ++i)
+		{
+			Collections.shuffle(list);
+			heap.reset(convertToIntArray(list.toArray()));
+			swapStats[i] = heap.getSwaps();
+		}
+
+		System.out.printf("Average swaps for optimal method:  %d\n", mean(swapStats));
 	}
 
 	public static void choice2()
