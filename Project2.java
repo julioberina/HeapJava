@@ -16,7 +16,8 @@ public class Project2
 	{
 		Scanner scan = new Scanner(System.in);
 		int choice = 0;
-		
+
+		addLines();
 		System.out.println("Please select how to test the program:\n");
 		System.out.println("(1) 20 sets of 100 randomly generated integers");
 		System.out.println("(2) Fixed integer values 1-100\n");
@@ -24,6 +25,7 @@ public class Project2
 
 		choice = scan.nextInt();
 		rand = new Random();
+		System.out.print("\n");
 
 		switch (choice)
 		{
@@ -37,6 +39,17 @@ public class Project2
 			System.out.println("Invalid input!  Exiting...");
 			break;
 		}
+
+		addLines();
+		System.out.print("\n");
+	}
+
+	public static void addLines()
+	{
+		for (int i = 0; i < 70; ++i)
+			System.out.print("=");
+
+		System.out.print("\n");
 	}
 
 	public static int[] convertToIntArray(Object[] arr)
