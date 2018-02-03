@@ -99,7 +99,10 @@ public class Heap
 		String output = "";
 
 		for (int i = 1; i < hArray.length; ++i)
-			output = output + Integer.toString(hArray[i]) + ((i < 100) ? " " : "");
+		{
+			if (hArray[i] > 0)
+				output = output + Integer.toString(hArray[i]) + ((i < 100) ? " " : "");
+		}
 		
 		return output;
 	}
