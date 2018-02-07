@@ -18,7 +18,8 @@ public class Heap
 	}
 
 	/*
-	  Constructor for using the optimal method of creating a heap
+	  Constructor for using the optimal method of creating a heap.  This method inserts all
+	  the values of the int array into the heap at once and does a reheap until heap is valid
 	*/
 	public Heap(int[] arr)
 	{
@@ -34,6 +35,10 @@ public class Heap
 			reheap(i);
 	}
 
+	/*
+	  The insert method takes 1 integer parameter and inserts it into the heap.
+	  Performs upHeap if necessary
+	*/
 	public void insert(int value)
 	{
 		if (currentIndex < 101)
@@ -46,6 +51,10 @@ public class Heap
 			System.out.println("Unable to add value.  Heap is full!");
 	}
 
+	/*
+	  This method removes the topmost value of the heap and performs a downHeap
+	  to maintain heap order.
+	*/
 	public void removeTop()
 	{		
 		if (currentIndex > 100)
@@ -57,6 +66,9 @@ public class Heap
 		downHeap(1);
 	}
 
+	/*
+	  This method simply returns the number of swaps so far.
+	*/
 	public int getSwaps()
 	{
 		return swaps;
@@ -64,6 +76,9 @@ public class Heap
 
 	// BEGIN CHOICE 1 SPECIFIC METHODS
 	
+	/*
+	  This method sets all slots of hArray to 0, which "clears" the heap
+	*/
 	public void clear()
 	{
 		if (hArray.length > 0)
@@ -76,6 +91,11 @@ public class Heap
 		swaps = 0;
 	}
 
+	/*
+	  This method replaces the contents of hArray with the contents of the
+	  int array parameter to "reset" the heap with new values.  Performs
+	  reheap when necessary to maintain max-heap order.
+	*/
 	public void reset(int[] arr)
 	{
 		swaps = 0;
@@ -93,7 +113,10 @@ public class Heap
 	}
 
 	// END CHOICE 1 SPECIFIC METHODS
-	
+
+	/*
+	Returns a string representation of the heap for console output purposes.  
+	*/
 	public String toString()
 	{
 		String output = "";
@@ -108,7 +131,13 @@ public class Heap
 	}
 
 	// BEGIN PRIVATE METHODS
-	
+
+	/*
+	  This is the upHeap operation, which continually checks if a child's value
+	  is bigger than its parent through the use of the index integer parameter.  
+	  This goes upward and checks continually until the child is no longer 
+	  bigger than the parent.
+	*/
 	private void upHeap(int index)
 	{
 		int temp = 0;
@@ -129,6 +158,12 @@ public class Heap
 		}
 	}
 
+	/*
+	  This method is typically performed when the root value is removed
+	  or when a reheap is performed.  The index integer parameter is used
+	  as the starting point and as a parent of some child.  It breaks once 
+	  the child is no longer bigger than the parent.
+	*/
 	private void downHeap(int index)
 	{
 		int temp = 0;
@@ -165,12 +200,22 @@ public class Heap
 		}
 	}
 
+	/*
+	  This method is ran when creating the heap using the optimal method
+	  or using reset to recreate the heap using the optimal method.  It does
+	  a down heap starting from the index integer parameter if the index
+	  is not a leaf node
+	*/
 	private void reheap(int index)
 	{
 		if (!isLeaf(index))
 			downHeap(index);
 	}
 
+	/*
+	  This method takes an index integer parameter, which is a node in the
+	  heap and determines if it's a leaf.
+	*/
 	private boolean isLeaf(int index)
 	{
 		if ((index * 2) > 100) // if left child index is bigger than 100
@@ -191,6 +236,12 @@ public class Heap
 		}
 	}
 
+	/*
+	  This method takes two integers, a and b, and interprets
+	  them as indices of the heap (hArray).  it checks which of the
+	  two indices has a bigger value in hArray and returns the index
+	  containing the max value.
+	 */
 	private int getMax(int a, int b)
 	{
 		return ((hArray[a] >= hArray[b]) ? a : b);
