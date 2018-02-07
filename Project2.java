@@ -11,7 +11,10 @@ public class Project2
 {
 	private static Random rand = null;
 	private static Heap heap = null;
-	
+
+	/*
+	  This is the main method for the entire project.  Everything is ran from here
+	*/
 	public static void main(String[] args)
 	{
 		Scanner scan = new Scanner(System.in);
@@ -44,6 +47,9 @@ public class Project2
 		System.out.print("\n");
 	}
 
+	/*
+	  This method simply adds spaces to the top and bottom of program for aesthetic purposes
+	*/
 	public static void addLines()
 	{
 		for (int i = 0; i < 70; ++i)
@@ -52,6 +58,9 @@ public class Project2
 		System.out.print("\n");
 	}
 
+	/*
+	  This method converts an Object array (List.toArray()) into a primitive int[] array
+	*/
 	public static int[] convertToIntArray(Object[] arr)
 	{
 		int[] result = new int[arr.length];
@@ -62,6 +71,9 @@ public class Project2
 		return result;
 	}
 
+	/*
+	  This method simply iterates over the array in a foreach manner to take the average of the array
+	*/
 	public static int mean(int[] arr)
 	{
 		int total = 0;
@@ -72,6 +84,9 @@ public class Project2
 		return (total / arr.length);
 	}
 
+	/*
+	  This method is the code that will be executed when the user chooses 1 in the menu
+	*/
 	public static void choice1()
 	{
 		List<Integer> list = new ArrayList<Integer>();
@@ -104,6 +119,9 @@ public class Project2
 		System.out.printf("Average swaps for optimal method:  %d\n", mean(swapStats));
 	}
 
+	/*
+	  This method is the code that will be excuted when the user chooses 2 in the menu
+	*/
 	public static void choice2()
 	{
 		int[] fixed = new int[101];
